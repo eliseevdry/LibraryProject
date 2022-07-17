@@ -1,4 +1,4 @@
 package org.eliseev.libraryproject.dao;
 
-public class BookDao {
+public class PersonDao {
 }
