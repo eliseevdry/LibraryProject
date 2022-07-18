@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class PersonDao {
@@ -26,19 +27,22 @@ public class PersonDao {
                 .stream().findAny().orElse(null);
     }
 
+    public Optional<Person> show(String fullName) {
+        return jdbcTemplate.query("SELECT* FROM person WHERE name=?", new Object[]{fullName}, new BeanPropertyRowMapper<>(Person.class))
+                .stream().findAny();
+    }
+
     public void save(Person person) {
-        jdbcTemplate.update("INSERT INTO person(full_name, year_of_birth, address) VALUES (?, ?, ?)",
-                person.getFullName(),
-                person.getYearOfBirth(),
-                person.getAddress()
+        jdbcTemplate.update("INSERT INTO person(name, year) VALUES (?, ?)",
+                person.getName(),
+                person.getYear()
         );
     }
 
     public void update(int id, Person person) {
-        jdbcTemplate.update("UPDATE person SET full_name=?, year_of_birth=?, address=? WHERE id=?",
-                person.getFullName(),
-                person.getYearOfBirth(),
-                person.getAddress(),
+        jdbcTemplate.update("UPDATE person SET name=?, year=? WHERE id=?",
+                person.getName(),
+                person.getYear(),
                 id
         );
     }

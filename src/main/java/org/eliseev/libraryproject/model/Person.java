@@ -1,19 +1,24 @@
 package org.eliseev.libraryproject.model;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class Person {
     private int id;
-    private String fullName;
-    private int yearOfBirth;
-    private String address;
+    @NotEmpty(message = "Имя не должно быть пустым!")
+    @Size(min = 5, max = 200, message = "Полное ФИО от 5 до 200 символов")
+    private String name;
+    @Min(value = 1850, message = "Некорректный год рождения")
+    private int year;
 
     public Person() {
     }
 
-    public Person(int id, String fullName, int yearOfBirth, String address) {
+    public Person(int id, String name, int year) {
         this.id = id;
-        this.fullName = fullName;
-        this.yearOfBirth = yearOfBirth;
-        this.address = address;
+        this.name = name;
+        this.year = year;
     }
 
     public int getId() {
@@ -24,27 +29,19 @@ public class Person {
         this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getName() {
+        return name;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getYearOfBirth() {
-        return yearOfBirth;
+    public int getYear() {
+        return year;
     }
 
-    public void setYearOfBirth(int yearOfBirth) {
-        this.yearOfBirth = yearOfBirth;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public void setYear(int year) {
+        this.year = year;
     }
 }

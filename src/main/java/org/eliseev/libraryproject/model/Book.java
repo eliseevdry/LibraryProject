@@ -1,12 +1,19 @@
 package org.eliseev.libraryproject.model;
 
+import javax.validation.constraints.NotBlank;
+
 public class Book {
     private int id;
+
+    private Integer personId;
+    @NotBlank(message = "Название не должно быть пустым!")
     private String title;
+    @NotBlank(message = "Должен быть автор!")
     private String author;
     private int year;
 
-    public Book(){}
+    public Book() {
+    }
 
     public Book(int id, String title, String author, int year) {
         this.id = id;
@@ -21,6 +28,14 @@ public class Book {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Integer getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Integer personId) {
+        this.personId = personId;
     }
 
     public String getTitle() {
